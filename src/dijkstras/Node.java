@@ -24,6 +24,6 @@ public class Node {
     }
 
     public AdjNode[] getAdjacent() {
-        return (AdjNode[]) adjacent_list.toArray();
+        return adjacent_list.toArray(new AdjNode[adjacent_list.size()]);
     }
 }
