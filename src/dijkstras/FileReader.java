@@ -24,9 +24,6 @@ public class FileReader {
         try{
             int number = Integer.parseInt(input.charAt(0) + "");
             String[] adjs = input.substring(input.indexOf(":") + 1).split(";");
-            for(String n : adjs){
-                System.out.println(n);
-            }
             Node n = new Node(number);
             for(String s : adjs){
                 String[] vars = s.split(",");
