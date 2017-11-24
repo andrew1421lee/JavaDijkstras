@@ -13,6 +13,8 @@ public class Node {
     private int number;
     // arraylist of adjacent nodes
     private ArrayList<AdjNode> adjacent_list = new ArrayList<>();
+    // distance to node
+    int distance = Integer.MAX_VALUE;
 
     /**
      * Node Constructor
@@ -53,4 +55,6 @@ public class Node {
     public AdjNode[] getAdjacent() {
         return adjacent_list.toArray(new AdjNode[adjacent_list.size()]);
     }
+
+    public void setDistance(int d) { this.distance = d; }
 }

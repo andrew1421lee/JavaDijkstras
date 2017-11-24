@@ -16,9 +16,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
         //Node[] test = FileReader.LoadGraphFile("C:\\Users\\Anchu\\Documents\\Java_workspace\\test1.txt");
-
     }
-
 
     public static void main(String[] args) {
         launch(args);
