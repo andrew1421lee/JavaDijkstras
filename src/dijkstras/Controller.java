@@ -9,29 +9,61 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 
+/**
+ * Controller Class
+ * Methods that will be called by GUI elements
+ * @author Anchu
+ */
 public class Controller {
+    // Holds last directory browsed
     private static String last_directory = ".";
+    // Path to selected item
     public static String file_path = ".";
+    // Textfield that shows file name
     @FXML private TextField browseFileField;
+    // Button to run slowly
     @FXML private Button runSlowButton;
 
+    /**
+     * handleBrowseButtonAction Method
+     * Is run when browse button is pressed, Opens file browser
+     * @param event Event
+     */
     @FXML protected void handleBrowseButtonAction(ActionEvent event){
+        // declare and initialize filechooser
         FileChooser chooser = new FileChooser();
+        // set title
         chooser.setTitle("Choose Graph File...");
+        // set initial directory
         chooser.setInitialDirectory(new File(last_directory));
+        // display and get user input
         File file = chooser.showOpenDialog(browseFileField.getScene().getWindow());
+        // if user selected a file
         if(file != null) {
+            // set textfield to filename
             browseFileField.setText(file.getName());
+            // save path
             file_path = file.getPath();
+            // save directory so it can be set for next time
             last_directory = file.getParent();
+            // enable run button
             runSlowButton.setDisable(false);
+        }else{
+            runSlowButton.setDisable(true);
         }
     }
 
+    /**
+     * handleRunSlowButtonAction Method
+     * Is run when Slow run button is pressed, loads data and runs dijkstras v^2
+     * @param event Event
+     */
     @FXML protected void handleRunSlowButtonAction(ActionEvent event){
+        // read the file and load into filecontents
         Node[] filecontents = FileReader.LoadGraphFile(file_path);
+        // Print out the contents as a test
         for(Node n : filecontents){
-            System.out.print(n.getNumber());
+            System.out.print(n.getNumber() + ":");
             for(AdjNode a : n.getAdjacent()){
                 System.out.print(a.getNumber());
             }
