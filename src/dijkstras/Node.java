@@ -2,6 +2,7 @@ package dijkstras;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Node Class
@@ -13,8 +14,9 @@ public class Node {
     private int number;
     // arraylist of adjacent nodes
     private ArrayList<AdjNode> adjacent_list = new ArrayList<>();
-    // distance to node
+    // distance to node, default to maximum
     int distance = Integer.MAX_VALUE;
+    // solution path
 
     /**
      * Node Constructor

@@ -8,6 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Controller Class
@@ -69,5 +71,6 @@ public class Controller {
             }
             System.out.println("\n");
         }
+        Dijkstra.RunDijkstras(new ArrayList<>(Arrays.asList(filecontents)), 0);
     }
 }
