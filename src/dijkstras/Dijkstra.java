@@ -1,39 +1,6 @@
 package dijkstras;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-class SolutionPath{
-    private int start_node;
-    private int total_cost;
-    private ArrayList<AdjNode> node_taken;
-
-    public int getStart_node() {
-        return start_node;
-    }
-
-    public int getTotal_cost() {
-        return total_cost;
-    }
-
-    public AdjNode[] getNode_taken() {
-        return node_taken.toArray(new AdjNode[node_taken.size()]);
-    }
-
-    public void addNode_taken(AdjNode n){
-        if(n != null && !node_taken.contains(n)){
-            node_taken.add(n);
-        }
-    }
-
-    public void setStart_node(int start_node) {
-        this.start_node = start_node;
-    }
-
-    public void setTotal_cost(int total_cost) {
-        this.total_cost = total_cost;
-    }
-}
 
 public class Dijkstra {
 
@@ -58,11 +25,7 @@ public class Dijkstra {
                 // calculate the distance to adjacent node
                 int cost = adj.getCost() + next.distance;
                 // get the graph index of the adjacent node
-                int adjindex = graph.indexOf(graph
-                        .stream()
-                        .filter(x -> x.getNumber() == adj.getNumber())
-                        .findFirst()
-                        .orElse(null));
+                int adjindex = FindNodeIndex(graph, adj.getNumber());
                 // if the distance to adj node is less than what is saved in the graph for the node
                 if(cost < graph.get(adjindex).distance){
                     // update the node's distance to cost
@@ -80,12 +43,7 @@ public class Dijkstra {
                     // update the memory
                     last = cost;
                     // update the index to current
-                    possible = Queue.indexOf(graph
-                            .stream()
-                            .filter(x -> x.getNumber() == adj.getNumber())
-                            .findFirst()
-                            .orElse(null));
-
+                    possible = FindNodeIndex(Queue, adj.getNumber());
                 }
             }
             // if index becomes impossible, stop
@@ -102,7 +60,15 @@ public class Dijkstra {
         }
     }
 
-    public static SolutionPath RunDijkstrasWithPriorityQueue(Node[] graph, int start){
-        return null;
+    public static void RunDijkstrasLinear(Node[] graph, int start){
+
+    }
+
+    private static int FindNodeIndex(ArrayList<Node> graph, int node_number){
+        return graph.indexOf(graph
+                .stream()
+                .filter(x -> x.getNumber() == node_number)
+                .findFirst()
+                .orElse(null));
     }
 }
