@@ -60,10 +60,6 @@ public class Dijkstra {
         }
     }
 
-    public static void RunDijkstrasLinear(Node[] graph, int start){
-
-    }
-
     private static int FindNodeIndex(ArrayList<Node> graph, int node_number){
         return graph.indexOf(graph
                 .stream()

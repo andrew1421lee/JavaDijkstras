@@ -20,7 +20,7 @@ public class Controller {
     // Holds last directory browsed
     private static String last_directory = ".";
     // Path to selected item
-    public static String file_path = ".";
+    private static String file_path = ".";
     // Textfield that shows file name
     @FXML private TextField browseFileField;
     // Button to run slowly
@@ -63,14 +63,18 @@ public class Controller {
     @FXML protected void handleRunSlowButtonAction(ActionEvent event){
         // read the file and load into filecontents
         Node[] filecontents = FileReader.LoadGraphFile(file_path);
+        if(filecontents == null){
+            throw new NullPointerException("File open error");
+        }
         // Print out the contents as a test
-        for(Node n : filecontents){
+        /*for(Node n : filecontents){
             System.out.print(n.getNumber() + ":");
             for(AdjNode a : n.getAdjacent()){
                 System.out.print(a.getNumber());
             }
             System.out.println("\n");
-        }
-        Dijkstra.RunDijkstras(new ArrayList<>(Arrays.asList(filecontents)), 0);
+        }*/
+        //Dijkstra.RunDijkstras(new ArrayList<>(Arrays.asList(filecontents)), 0);
+        Thorup.RunThorup(new ArrayList<>(Arrays.asList(filecontents)), 0);
     }
 }
