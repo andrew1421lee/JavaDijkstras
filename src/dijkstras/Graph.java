@@ -9,7 +9,7 @@ class Vertex{
     public Vertex(int id, int[] edges){
         this.id = id;
         this.edges = edges;
-        this.distance = Integer.MAX_VALUE;
+        this.distance = 999999999;
     }
 
     public int getId() {
@@ -33,8 +33,15 @@ class Edge{
     private int cost;
     private int source;
     private int destination;
-    public Edge(int id, int source, int cost, int destination){
-        this.id = id;
+    public Edge(int source, int destination, int cost){
+        /*
+        if(source <= destination){
+            this.id = Integer.parseInt(source + "" + destination);
+        }else{
+            this.id = Integer.parseInt(destination + "" + source);
+        }*/
+        this.id = Integer.parseInt(source + "" + destination);
+
         this.source = source;
         this.destination = destination;
         this.cost = cost;
@@ -55,6 +62,7 @@ class Edge{
     public int getCost(){
         return cost;
     }
+
 }
 
 public class Graph {
@@ -75,11 +83,29 @@ public class Graph {
                 && edges.add(e);
     }
 
+    public void addEdges(Edge[] e){
+        for(Edge i : e){
+            if(i != null
+                    && !edges.contains(e)
+                    && edges.stream().noneMatch(x -> x.getId() == i.getId())){
+                edges.add(i);
+            }
+        }
+    }
+
     public Vertex getVertex(int id){
         return nodes.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
     }
 
     public Edge getEdge(int id){
         return edges.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+    }
+
+    public Vertex[] getVertices(){
+        return nodes.toArray(new Vertex[nodes.size()]);
+    }
+
+    public Edge[] getEdges(){
+        return edges.toArray(new Edge[edges.size()]);
     }
 }

@@ -62,19 +62,22 @@ public class Controller {
      */
     @FXML protected void handleRunSlowButtonAction(ActionEvent event){
         // read the file and load into filecontents
-        Node[] filecontents = FileReader.LoadGraphFile(file_path);
+        Graph filecontents = FileReader.LoadGraphFile(file_path);
         if(filecontents == null){
             throw new NullPointerException("File open error");
         }
         // Print out the contents as a test
-        /*for(Node n : filecontents){
-            System.out.print(n.getNumber() + ":");
-            for(AdjNode a : n.getAdjacent()){
-                System.out.print(a.getNumber());
+        /*for(Vertex v : filecontents.getVertices()){
+            System.out.print(v.getId() + ":");
+            for(int a : v.getEdges()){
+                System.out.print(a);
             }
             System.out.println("\n");
+        }
+        for(Edge e : filecontents.getEdges()){
+            System.out.println(e.getId());
         }*/
-        //Dijkstra.RunDijkstras(new ArrayList<>(Arrays.asList(filecontents)), 0);
-        Thorup.RunThorup(new ArrayList<>(Arrays.asList(filecontents)), 0);
+        Dijkstra.RunDijkstras(filecontents, 0);
+        //Thorup.RunThorup(new ArrayList<>(Arrays.asList(filecontents)), 0);
     }
 }

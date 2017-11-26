@@ -1,19 +1,20 @@
 package dijkstras;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Dijkstra {
 
-    public static void RunDijkstras(ArrayList<Node> graph, int start){
+    public static void RunDijkstras(Graph graph, int start){
         // queue of nodes
-        ArrayList<Node> Queue = new ArrayList<>();
+        ArrayList<Vertex> Queue = new ArrayList<>();
         // new solution path
         // add all nodes to the queue
-        Queue.addAll(graph);
+        Queue.addAll(Arrays.asList(graph.getVertices()));
         // start node is 0
         Queue.get(start).setDistance(0);
         // start with the start node
-        Node next = Queue.remove(start);
+        Vertex next = Queue.remove(start);
         // loop until the queue is empty
         while(!Queue.isEmpty()){
             // comparison value distance to find min node
@@ -21,29 +22,30 @@ public class Dijkstra {
             // index of min node
             int possible = -1;
             // loop through all adjacent nodes
-            for(AdjNode adj : next.getAdjacent()){
+            for(int a : next.getEdges()){
+                Edge adj = graph.getEdge(a);
                 // calculate the distance to adjacent node
-                int cost = adj.getCost() + next.distance;
+                int cost = adj.getCost() + next.getDistance();
                 // get the graph index of the adjacent node
-                int adjindex = FindNodeIndex(graph, adj.getNumber());
+                //int destindex = FindNodeIndex(graph, adj.getNumber());
                 // if the distance to adj node is less than what is saved in the graph for the node
-                if(cost < graph.get(adjindex).distance){
+                if(cost < graph.getVertex(adj.getDestination()).getDistance()){
                     // update the node's distance to cost
-                    graph.get(adjindex).setDistance(cost);
+                    graph.getVertex(adj.getDestination()).setDistance(cost);
                     // print out the result
                     System.out.println("From: "
-                            + next.getNumber()
+                            + next.getId()
                             + " -> "
-                            + graph.get(adjindex).getNumber()
+                            + graph.getVertex(adj.getDestination()).getId()
                             + " cost: "
                             + cost);
                 }
                 // For finding the min distance adjacent node
-                if(graph.get(adjindex).distance < last){
+                if(graph.getVertex(adj.getDestination()).getDistance() < last){
                     // update the memory
                     last = cost;
                     // update the index to current
-                    possible = FindNodeIndex(Queue, adj.getNumber());
+                    possible = FindNodeIndex(Queue, adj.getDestination());
                 }
             }
             // if index becomes impossible, stop
@@ -55,15 +57,15 @@ public class Dijkstra {
             }
         }
         // print out the completed graph
-        for(Node n : graph){
-            System.out.println("Node: " + n.getNumber() + " cost: " + n.distance);
+        for(Vertex v : graph.getVertices()){
+            System.out.println("Node: " + v.getId() + " cost: " + v.getDistance());
         }
     }
 
-    private static int FindNodeIndex(ArrayList<Node> graph, int node_number){
+    private static int FindNodeIndex(ArrayList<Vertex> graph, int node_number){
         return graph.indexOf(graph
                 .stream()
-                .filter(x -> x.getNumber() == node_number)
+                .filter(x -> x.getId() == node_number)
                 .findFirst()
                 .orElse(null));
     }
