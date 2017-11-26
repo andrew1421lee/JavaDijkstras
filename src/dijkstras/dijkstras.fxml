@@ -21,6 +21,9 @@
     <Button text="Browse..." onAction="#handleBrowseButtonAction"
           GridPane.columnIndex="2" GridPane.rowIndex="1"/>
 
-    <Button text="Run slow" fx:id="runSlowButton" onAction="#handleRunSlowButtonAction"
+    <Button text="Run Dijkstra" fx:id="runSlowButton" onAction="#handleRunSlowButtonAction"
           disable="true" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="3"/>
+
+    <Button text="Run Thorup" fx:id="runFastButton" onAction="#handleRunFastButtonAction"
+            disable="true" GridPane.columnIndex="4" GridPane.rowIndex="3" GridPane.columnSpan="3"/>
 </GridPane>

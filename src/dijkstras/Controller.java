@@ -25,6 +25,8 @@ public class Controller {
     @FXML private TextField browseFileField;
     // Button to run slowly
     @FXML private Button runSlowButton;
+    // button to run fastly
+    @FXML private Button runFastButton;
 
     /**
      * handleBrowseButtonAction Method
@@ -50,8 +52,10 @@ public class Controller {
             last_directory = file.getParent();
             // enable run button
             runSlowButton.setDisable(false);
+            runFastButton.setDisable(false);
         }else{
             runSlowButton.setDisable(true);
+            runFastButton.setDisable(true);
         }
     }
 
@@ -79,5 +83,14 @@ public class Controller {
         }*/
         Dijkstra.RunDijkstras(filecontents, 0);
         //Thorup.RunThorup(new ArrayList<>(Arrays.asList(filecontents)), 0);
+    }
+
+    @FXML protected void handleRunFastButtonAction(ActionEvent event){
+        Graph filecontents = FileReader.LoadGraphFile(file_path);
+        if(filecontents == null){
+            throw new NullPointerException("File open error");
+        }
+
+        Thorup.RunThorup(filecontents, 0);
     }
 }
