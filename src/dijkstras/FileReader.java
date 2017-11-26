@@ -57,7 +57,7 @@ public class FileReader {
         if(input.startsWith("#")) return null;
         try{
             // read the first character of a line as the node number
-            int number = Integer.parseInt(input.charAt(0) + "");
+            int number = Integer.parseInt(input.substring(0, input.indexOf(":")));
             // split line by semicolons
             String[] adjs = input.substring(input.indexOf(":") + 1).split(";");
             // create new node with number
