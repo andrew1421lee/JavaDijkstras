@@ -20,7 +20,7 @@ public class Dijkstra {
             // comparison value distance to find min node
             int last = Integer.MAX_VALUE;
             // index of min node
-            int possible = -1;
+            int possible = 0;
             // loop through all adjacent nodes
             for(int a : next.getEdges()){
                 Edge adj = graph.getEdge(a);
@@ -41,20 +41,21 @@ public class Dijkstra {
                             + cost);
                 }
                 // For finding the min distance adjacent node
-                if(graph.getVertex(adj.getDestination()).getDistance() < last){
+                if(graph.getVertex(adj.getDestination()).getDistance() < last && FindNodeIndex(Queue, adj.getDestination()) != -1){
                     // update the memory
                     last = cost;
                     // update the index to current
                     possible = FindNodeIndex(Queue, adj.getDestination());
                 }
             }
+            next = Queue.remove(possible);
             // if index becomes impossible, stop
-            if(possible < 0){
+            /*if(possible < 0){
                 break;
             // otherwise remove the min distance node from the queue and continue
             }else{
                 next = Queue.remove(possible);
-            }
+            }*/
         }
         // print out the completed graph
         for(Vertex v : graph.getVertices()){
