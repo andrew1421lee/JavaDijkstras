@@ -52,7 +52,7 @@ public class Controller {
             last_directory = file.getParent();
             // enable run button
             runSlowButton.setDisable(false);
-            runFastButton.setDisable(false);
+            //runFastButton.setDisable(false);
         }else{
             runSlowButton.setDisable(true);
             runFastButton.setDisable(true);
