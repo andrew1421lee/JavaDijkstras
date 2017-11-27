@@ -55,8 +55,7 @@ public class Thorup {
         int index = 0;
         for (List<Integer> bucket : buckets) {
             Integer[] insidebucket = new Integer[bucket.size()];
-            insidebucket = bucket.toArray(insidebucket);
-            insidebucket = InsertionSort(insidebucket);
+            insidebucket = InsertionSort(bucket.toArray(insidebucket));
             for (Integer anInsidebucket : insidebucket) {
                 elements[index] = anInsidebucket;
                 index++;
