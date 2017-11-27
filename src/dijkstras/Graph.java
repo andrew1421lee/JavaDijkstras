@@ -6,10 +6,18 @@ class Vertex{
     private int id;
     private int[] edges;
     private int distance;
+    private int previous;
     public Vertex(int id, int[] edges){
         this.id = id;
         this.edges = edges;
         this.distance = 999999999;
+    }
+
+    public int getPrevious(){
+        return previous;
+    }
+    public void setPrevious(int p){
+        this.previous = p;
     }
 
     public int getId() {

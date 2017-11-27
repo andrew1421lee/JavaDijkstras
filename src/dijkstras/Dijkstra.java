@@ -32,6 +32,7 @@ public class Dijkstra {
                 if(cost < graph.getVertex(adj.getDestination()).getDistance()){
                     // update the node's distance to cost
                     graph.getVertex(adj.getDestination()).setDistance(cost);
+                    graph.getVertex(adj.getDestination()).setPrevious(next.getId());
                     // print out the result
                     System.out.println("From: "
                             + next.getId()
@@ -59,7 +60,7 @@ public class Dijkstra {
         }
         // print out the completed graph
         for(Vertex v : graph.getVertices()){
-            System.out.println("Node: " + v.getId() + " cost: " + v.getDistance());
+            System.out.println("Node: " + v.getId() + " cost: " + v.getDistance() + " previous: " + v.getPrevious());
         }
     }
 
