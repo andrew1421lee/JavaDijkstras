@@ -66,7 +66,7 @@ public class Controller {
      */
     @FXML protected void handleRunSlowButtonAction(ActionEvent event){
         // read the file and load into filecontents
-        Graph filecontents = FileReader.LoadGraphFile(file_path);
+        Graph filecontents = FileReader.LoadGraphFile(file_path, false);
         if(filecontents == null){
             throw new NullPointerException("File open error");
         }
@@ -86,7 +86,7 @@ public class Controller {
     }
 
     @FXML protected void handleRunFastButtonAction(ActionEvent event){
-        Graph filecontents = FileReader.LoadGraphFile(file_path);
+        Graph filecontents = FileReader.LoadGraphFile(file_path, true);
         if(filecontents == null){
             throw new NullPointerException("File open error");
         }

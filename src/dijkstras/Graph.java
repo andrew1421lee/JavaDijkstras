@@ -33,14 +33,16 @@ class Edge{
     private int cost;
     private int source;
     private int destination;
-    public Edge(int source, int destination, int cost){
-        /*
-        if(source <= destination){
-            this.id = Integer.parseInt(source + "" + destination);
+    public Edge(int source, int destination, int cost, boolean mode){
+        if(mode){
+            if(source <= destination){
+                this.id = Integer.parseInt(source + "" + destination);
+            }else{
+                this.id = Integer.parseInt(destination + "" + source);
+            }
         }else{
-            this.id = Integer.parseInt(destination + "" + source);
-        }*/
-        this.id = Integer.parseInt(source + "" + destination);
+            this.id = Integer.parseInt(source + "" + destination);
+        }
 
         this.source = source;
         this.destination = destination;

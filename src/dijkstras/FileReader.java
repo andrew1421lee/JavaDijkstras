@@ -28,14 +28,14 @@ public class FileReader {
      * @param filename file to read
      * @return Node array
      */
-    static Graph LoadGraphFile(String filename){
+    static Graph LoadGraphFile(String filename, boolean mode){
         // create arraylist that will hold nodes
         ArrayList<ParseData> from_file = new ArrayList<>();
         Graph graph = new Graph();
         // try to open the file
         try(Stream<String> stream = Files.lines(Paths.get(filename))){
             // read the file line by line and pass them to the parser and then the arraylist
-            stream.forEach(line -> from_file.add(StringParser(line)));
+            stream.forEach(line -> from_file.add(StringParser(line, mode)));
             from_file.forEach(x -> { graph.addVertex(x.vertex); graph.addEdges(x.edge); });
             // return the completed array
             return graph;
@@ -52,7 +52,7 @@ public class FileReader {
      * @param input string to parse
      * @return Node object
      */
-    private static ParseData StringParser(String input){
+    private static ParseData StringParser(String input, boolean mode){
         // ignore lines that start with #
         if(input.startsWith("#")) return null;
         try{
@@ -75,7 +75,7 @@ public class FileReader {
                 int adj_cost = Integer.parseInt(vars[1].trim());
                 // add as adjacent node
                 //n.addAdjNode(new AdjNode(adj_num, adj_cost));
-                Edge ed = new Edge(number, adj_num, adj_cost);
+                Edge ed = new Edge(number, adj_num, adj_cost, mode);
                 adj.add(ed);
                 adj_nums.add(ed.getId());
             }
