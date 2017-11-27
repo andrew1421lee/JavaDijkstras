@@ -26,7 +26,7 @@ public class FileReader {
      * LoadGraphFile Method
      * Reads given file and parses strings into node objects.
      * @param filename file to read
-     * @return Node array
+     * @return Graph graph
      */
     static Graph LoadGraphFile(String filename, boolean mode){
         // create arraylist that will hold nodes
@@ -50,7 +50,7 @@ public class FileReader {
      * StringParser
      * Parses given string into node objects
      * @param input string to parse
-     * @return Node object
+     * @return ParseData object
      */
     private static ParseData StringParser(String input, boolean mode){
         // ignore lines that start with #
@@ -61,7 +61,7 @@ public class FileReader {
             // split line by semicolons
             String[] adjs = input.substring(input.indexOf(":") + 1).split(";");
             // create new node with number
-            Node n = new Node(number);
+            //Node n = new Node(number);
 
             ArrayList<Edge> adj = new ArrayList<>();
             ArrayList<Integer> adj_nums = new ArrayList<>();
