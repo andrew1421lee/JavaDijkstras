@@ -12,10 +12,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("dijkstras.fxml"));
-        primaryStage.setTitle("Super SSSP");
+        primaryStage.setTitle("Super Dijkstra's");
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("nice.png ")));
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root, 250, 90));
+        primaryStage.setScene(new Scene(root, 250, 500));
         primaryStage.show();
         //Node[] test = FileReader.LoadGraphFile("C:\\Users\\Anchu\\Documents\\Java_workspace\\test1.txt");
     }

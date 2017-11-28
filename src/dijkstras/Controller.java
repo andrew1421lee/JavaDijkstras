@@ -1,13 +1,18 @@
 package dijkstras;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 /**
  * Controller Class
@@ -23,8 +28,14 @@ public class Controller {
     @FXML private TextField browseFileField;
     // Button to run slowly
     @FXML private Button runSlowButton;
-    // button to run fastly
-    @FXML private Button runFastButton;
+    @FXML private TextArea logField;
+    private PrintStream outstream;
+
+    public void initialize(){
+        outstream = new PrintStream(new Console(logField));
+        System.setOut(outstream);
+        System.out.println("READY");
+    }
 
     /**
      * handleBrowseButtonAction Method
@@ -53,7 +64,7 @@ public class Controller {
             //runFastButton.setDisable(false);
         }else{
             runSlowButton.setDisable(true);
-            runFastButton.setDisable(true);
+            //runFastButton.setDisable(true);
         }
     }
 
@@ -62,6 +73,7 @@ public class Controller {
      * Is run when Slow run button is pressed, loads data and runs dijkstras v^2
      * @param event Event
      */
+
     @FXML protected void handleRunSlowButtonAction(ActionEvent event){
         // read the file and load into filecontents
         Graph filecontents = FileReader.LoadGraphFile(file_path, false);
@@ -80,15 +92,21 @@ public class Controller {
             System.out.println(e.getId());
         }*/
         Dijkstra.RunDijkstras(filecontents, 0);
-        //Thorup.RunThorup(new ArrayList<>(Arrays.asList(filecontents)), 0);
     }
+    
+    public class Console extends OutputStream{
+        private TextArea outfield;
 
-    @FXML protected void handleRunFastButtonAction(ActionEvent event){
-        Graph filecontents = FileReader.LoadGraphFile(file_path, true);
-        if(filecontents == null){
-            throw new NullPointerException("File open error");
+        public Console(TextArea con){
+            outfield = con;
         }
 
-        Thorup.RunThorup(filecontents, 0);
+        public void appendOut(String s){
+            Platform.runLater(() -> outfield.appendText(s));
+        }
+
+        public void write(int b) throws IOException{
+            appendOut(String.valueOf((char)b));
+        }
     }
 }
