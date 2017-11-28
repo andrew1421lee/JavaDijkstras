@@ -11,29 +11,40 @@
 <GridPane fx:controller="dijkstras.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" hgap="10" vgap="10">
     <padding><Insets top="5" right="5" bottom="5" left="5"/></padding>
-    <Text text="Choose input file"
-        GridPane.columnIndex="0" GridPane.rowIndex="0"
-        GridPane.columnSpan="2"/>
 
     <TextField fx:id="browseFileField" editable="false"
-        GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+        minWidth="175"
+        GridPane.columnIndex="0" GridPane.rowIndex="1"/>
 
     <Button text="Browse..." onAction="#handleBrowseButtonAction"
+        prefWidth="80"
         GridPane.columnIndex="2" GridPane.rowIndex="1"/>
 
     <Button text="Run Dijkstra" fx:id="runSlowButton" onAction="#handleRunSlowButtonAction"
-        disable="true" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        prefWidth="80"
+        disable="true" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
 
-    <CheckBox text="Delay" fx:id="delayToggle"
-        GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <CheckBox text="Delay" fx:id="delayToggle" onAction="#handleDelayToggle"
+        GridPane.columnIndex="4" GridPane.rowIndex="1"/>
 
-    <TextField text="100" fx:id="delayValue" disable="true"
-        GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+    <MenuButton text="500" fx:id="delayField" disable="true"
+        GridPane.columnIndex="5" GridPane.rowIndex="1">
+        <items>
+            <MenuItem text="500" onAction="#actionMenu1"/>
+            <MenuItem text="1000" onAction="#actionMenu2"/>
+            <MenuItem text="2000" onAction="#actionMenu3"/>
+            <MenuItem text="4000" onAction="#actionMenu4"/>
+            <MenuItem text="8000" onAction="#actionMenu5"/>
+        </items>
+    </MenuButton>
 
     <TextArea fx:id="logField"
-        minHeight="400" maxHeight="400" minWidth="250" maxWidth="240"
-        GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="3"
-        editable="false"
+        minHeight="435" maxHeight="435" minWidth="500" maxWidth="500"
+        GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="3"
+        editable="false" style="-fx-font-family: monospace;"
     />
+
+    <Button fx:id="clearButton" text="Clear" onAction="#handleClearButton"
+        GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 </GridPane>
 

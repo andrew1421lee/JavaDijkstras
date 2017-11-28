@@ -15,7 +15,7 @@ public class Main extends Application {
         primaryStage.setTitle("Super Dijkstra's");
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("nice.png ")));
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root, 250, 500));
+        primaryStage.setScene(new Scene(root, 500, 515));
         primaryStage.show();
         //Node[] test = FileReader.LoadGraphFile("C:\\Users\\Anchu\\Documents\\Java_workspace\\test1.txt");
     }

@@ -3,9 +3,7 @@ package dijkstras;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 
@@ -29,12 +27,19 @@ public class Controller {
     // Button to run slowly
     @FXML private Button runSlowButton;
     @FXML private TextArea logField;
-    private PrintStream outstream;
+    @FXML private CheckBox delayToggle;
+    @FXML private MenuButton delayField;
+
+    private static int delayMS;
 
     public void initialize(){
-        outstream = new PrintStream(new Console(logField));
+        PrintStream outstream = new PrintStream(new Console(logField));
         System.setOut(outstream);
-        System.out.println("READY");
+        System.out.println("||||||||||||||||||||||||||||||||");
+        System.out.println("[[[[[[[ Super Dijkstra's ]]]]]]]");
+        System.out.println("||||||||||||||||||||||||||||||||");
+        System.out.println("Written by Andrew Lee");
+        System.out.println("Load file to continue...");
     }
 
     /**
@@ -61,7 +66,7 @@ public class Controller {
             last_directory = file.getParent();
             // enable run button
             runSlowButton.setDisable(false);
-            //runFastButton.setDisable(false);
+            System.out.println("File \"" + file.getName() + "\" loaded.");
         }else{
             runSlowButton.setDisable(true);
             //runFastButton.setDisable(true);
@@ -93,7 +98,51 @@ public class Controller {
         }*/
         Dijkstra.RunDijkstras(filecontents, 0);
     }
-    
+
+    @FXML protected  void handleClearButton(){
+        logField.setText("");
+        System.out.println("Log cleared");
+    }
+
+    @FXML protected void handleDelayToggle(ActionEvent event){
+        delayField.setDisable(!delayField.isDisabled());
+        if(!delayField.isDisabled()){
+            setDelay(Integer.parseInt(delayField.getText()));
+        }else{
+            System.out.println("Delay Disabled");
+        }
+    }
+
+    @FXML protected void actionMenu1(ActionEvent event){
+        delayField.setText("500");
+        setDelay(500);
+    }
+
+    @FXML protected void actionMenu2(ActionEvent event){
+        delayField.setText("1000");
+        setDelay(1000);
+    }
+
+    @FXML protected void actionMenu3(ActionEvent event){
+        delayField.setText("2000");
+        setDelay(2000);
+    }
+
+    @FXML protected void actionMenu4(ActionEvent event){
+        delayField.setText("4000");
+        setDelay(4000);
+    }
+
+    @FXML protected void actionMenu5(ActionEvent event){
+        delayField.setText("8000");
+        setDelay(8000);
+    }
+
+    private static void setDelay(int delay){
+        delayMS = delay;
+        System.out.println("Delay Enabled: " + delay + " ms");
+    }
+
     public class Console extends OutputStream{
         private TextArea outfield;
 
