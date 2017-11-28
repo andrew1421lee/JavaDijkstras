@@ -13,7 +13,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("dijkstras.fxml"));
         primaryStage.setTitle("Super Dijkstra's");
-        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("nice.png ")));
+        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("nice.png")));
+        //primaryStage.getIcons().add(new Image("file:dijkstras/nice.png"));
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 530, 515));
         primaryStage.show();
