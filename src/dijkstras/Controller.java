@@ -35,10 +35,16 @@ public class Controller {
     public void initialize(){
         PrintStream outstream = new PrintStream(new Console(logField));
         System.setOut(outstream);
-        System.out.println("||||||||||||||||||||||||||||||||");
-        System.out.println("[[[[[[[ Super Dijkstra's ]]]]]]]");
-        System.out.println("||||||||||||||||||||||||||||||||");
-        System.out.println("Written by Andrew Lee");
+        System.out.println("  _____                         _____  _ _ _        _                 ");
+        System.out.println(" / ____|                       |  __ \\(_|_) |      | |                ");
+        System.out.println("| (___  _   _ _ __   ___ _ __  | |  | |_ _| | _____| |_ _ __ __ _ ___ ");
+        System.out.println(" \\___ \\| | | | '_ \\ / _ \\ '__| | |  | | | | |/ / __| __| '__/ _` / __|");
+        System.out.println(" ____) | |_| | |_) |  __/ |    | |__| | | |   <\\__ \\ |_| | | (_| \\__ \\");
+        System.out.println("|_____/ \\__,_| .__/ \\___|_|    |_____/|_| |_|\\_\\___/\\__|_|  \\__,_|___/");
+        System.out.println("             | |                       _/ |                           ");
+        System.out.println("             |_|                      |__/  Written by Andrew Lee");
+
+        System.out.println("");
         System.out.println("Load file to continue...");
     }
 
@@ -59,7 +65,7 @@ public class Controller {
         // if user selected a file
         if(file != null) {
             // set textfield to filename
-            browseFileField.setText(file.getName());
+            browseFileField.setText(file.getPath());
             // save path
             file_path = file.getPath();
             // save directory so it can be set for next time

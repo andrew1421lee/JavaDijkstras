@@ -17,17 +17,18 @@
         GridPane.columnIndex="0" GridPane.rowIndex="1"/>
 
     <Button text="Browse..." onAction="#handleBrowseButtonAction"
-        prefWidth="80"
+        prefWidth="90"
         GridPane.columnIndex="2" GridPane.rowIndex="1"/>
 
     <Button text="Run Dijkstra" fx:id="runSlowButton" onAction="#handleRunSlowButtonAction"
-        prefWidth="80"
+        prefWidth="90"
         disable="true" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
 
     <CheckBox text="Delay" fx:id="delayToggle" onAction="#handleDelayToggle"
         GridPane.columnIndex="4" GridPane.rowIndex="1"/>
 
     <MenuButton text="500" fx:id="delayField" disable="true"
+        prefWidth="65"
         GridPane.columnIndex="5" GridPane.rowIndex="1">
         <items>
             <MenuItem text="500" onAction="#actionMenu1"/>
@@ -39,7 +40,7 @@
     </MenuButton>
 
     <TextArea fx:id="logField"
-        minHeight="435" maxHeight="435" minWidth="500" maxWidth="500"
+        minHeight="435" maxHeight="435" minWidth="530" maxWidth="530"
         GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="3"
         editable="false" style="-fx-font-family: monospace;"
     />
