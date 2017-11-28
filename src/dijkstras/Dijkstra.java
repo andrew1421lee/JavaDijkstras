@@ -69,11 +69,11 @@ public class Dijkstra {
                 next = Queue.remove(possible);
             }*/
         }
+        DelayPrint("Return completed graph", delay);
         // print out the completed graph
         for(Vertex v : graph.getVertices()){
             System.out.println("Node: " + v.getId() + " cost: " + v.getDistance() + " previous: " + v.getPrevious());
         }
-        DelayPrint("Return completed graph", delay);
         return graph;
     }
 
