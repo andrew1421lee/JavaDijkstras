@@ -11,6 +11,7 @@ class Vertex{
         this.id = id;
         this.edges = edges;
         this.distance = 999999999;
+        this.previous = -1;
     }
 
     public int getPrevious(){
