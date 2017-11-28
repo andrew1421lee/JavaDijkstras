@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 class ParseData{
@@ -60,8 +61,8 @@ public class FileReader {
             int number = Integer.parseInt(input.substring(0, input.indexOf(":")));
             // split line by semicolons
             String[] adjs = input.substring(input.indexOf(":") + 1).split(";");
+
             // create new node with number
-            //Node n = new Node(number);
 
             ArrayList<Edge> adj = new ArrayList<>();
             ArrayList<Integer> adj_nums = new ArrayList<>();
@@ -69,6 +70,9 @@ public class FileReader {
             for(String s : adjs){
                 // split strings by comma
                 String[] vars = s.split(",");
+                if(Objects.equals(vars[0], "")){
+                    break;
+                }
                 // parse first int as number
                 int adj_num = Integer.parseInt(vars[0].trim());
                 // parse second int as cost
