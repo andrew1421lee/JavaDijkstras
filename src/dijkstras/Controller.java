@@ -27,7 +27,6 @@ public class Controller {
     // Button to run slowly
     @FXML private Button runSlowButton;
     @FXML private TextArea logField;
-    @FXML private CheckBox delayToggle;
     @FXML private MenuButton delayField;
 
     private static int delayMS;
@@ -102,7 +101,14 @@ public class Controller {
         for(Edge e : filecontents.getEdges()){
             System.out.println(e.getId());
         }*/
-        Dijkstra.RunDijkstras(filecontents, 0);
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                Dijkstra.RunDijkstras(filecontents, 0, delayMS);
+
+            }
+        };
+        new Thread(r).start();
     }
 
     @FXML protected  void handleClearButton(){
