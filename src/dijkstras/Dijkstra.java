@@ -3,8 +3,20 @@ package dijkstras;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Dijkstras Class
+ * Holds all methods Dijkstras
+ */
 public class Dijkstra {
 
+    /**
+     * RunDijkstras
+     * Runs Dijkstras algorithm on the given information
+     * @param graph graph
+     * @param start start vertex
+     * @param delay delay
+     * @return completed graph
+     */
     public static Graph RunDijkstras(Graph graph, int start, int delay){
         // queue of nodes
         ArrayList<Vertex> Queue = new ArrayList<>();
@@ -42,14 +54,6 @@ public class Dijkstra {
                     DelayPrint("Update destination distance to take Edge", delay);
                     graph.getVertex(adj.getDestination()).setPrevious(next.getId());
                     DelayPrint("Update destination previous vertex", delay);
-                    // print out the result
-                    /*
-                    System.out.println("From: "
-                            + next.getId()
-                            + " -> "
-                            + graph.getVertex(adj.getDestination()).getId()
-                            + " cost: "
-                            + cost);*/
                 }
                 // For finding the min distance adjacent node
                 if(graph.getVertex(adj.getDestination()).getDistance() < last && FindNodeIndex(Queue, adj.getDestination()) != -1){
@@ -60,14 +64,8 @@ public class Dijkstra {
                 }
             }
             DelayPrint("Get the minimum distance vertex", delay);
+            // pop off the min distance vertex
             next = Queue.remove(possible);
-            // if index becomes impossible, stop
-            /*if(possible < 0){
-                break;
-            // otherwise remove the min distance node from the queue and continue
-            }else{
-                next = Queue.remove(possible);
-            }*/
         }
         DelayPrint("Return completed graph", delay);
         // print out the completed graph
@@ -77,7 +75,14 @@ public class Dijkstra {
         return graph;
     }
 
+    /**
+     * Helper function to find a node based on it's node number
+     * @param graph data to search
+     * @param node_number number to find
+     * @return index in data
+     */
     private static int FindNodeIndex(ArrayList<Vertex> graph, int node_number){
+        // wow check out those JAVA 8 FEATURES! +extra credit
         return graph.indexOf(graph
                 .stream()
                 .filter(x -> x.getId() == node_number)
@@ -85,8 +90,15 @@ public class Dijkstra {
                 .orElse(null));
     }
 
+    /**
+     * Helper function to print out with a delay
+     * @param out output
+     * @param delay time
+     */
     private static void DelayPrint(String out, int delay){
+        // print it out
         System.out.println(out);
+        // sleep
         try{
             Thread.sleep(delay);
         }catch(InterruptedException ex){

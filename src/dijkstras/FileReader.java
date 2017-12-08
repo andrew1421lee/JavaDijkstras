@@ -8,9 +8,15 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+/**
+ * Used to pass data around internal functions
+ * Contains a vertex and array of edge objects
+ */
 class ParseData{
     Vertex vertex;
     Edge[] edge;
+
+    // constructor setting all values
     public ParseData(Vertex v, Edge[] e){
         this.vertex = v;
         this.edge = e;
@@ -32,6 +38,7 @@ public class FileReader {
     static Graph LoadGraphFile(String filename, boolean mode){
         // create arraylist that will hold nodes
         ArrayList<ParseData> from_file = new ArrayList<>();
+        // create a new graph to hold all this stuff
         Graph graph = new Graph();
         // try to open the file
         try(Stream<String> stream = Files.lines(Paths.get(filename))){
@@ -61,10 +68,9 @@ public class FileReader {
             int number = Integer.parseInt(input.substring(0, input.indexOf(":")));
             // split line by semicolons
             String[] adjs = input.substring(input.indexOf(":") + 1).split(";");
-
-            // create new node with number
-
+            // create array to hold adjacent edges
             ArrayList<Edge> adj = new ArrayList<>();
+            // create array to hold adj numbers
             ArrayList<Integer> adj_nums = new ArrayList<>();
             // loop through all strings
             for(String s : adjs){
@@ -78,13 +84,12 @@ public class FileReader {
                 // parse second int as cost
                 int adj_cost = Integer.parseInt(vars[1].trim());
                 // add as adjacent node
-                //n.addAdjNode(new AdjNode(adj_num, adj_cost));
+                // Create new edge based on data read and add to lists
                 Edge ed = new Edge(number, adj_num, adj_cost, mode);
                 adj.add(ed);
                 adj_nums.add(ed.getId());
             }
             // return created node
-            //return new Vertex(number, adj.toArray(new Edge[adj.size()]));
             return new ParseData( new Vertex(number, adj_nums.stream().mapToInt(i -> i).toArray()),
                     adj.toArray(new Edge[adj.size()]) );
         }

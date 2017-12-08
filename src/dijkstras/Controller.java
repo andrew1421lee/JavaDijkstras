@@ -26,12 +26,18 @@ public class Controller {
     @FXML private TextField browseFileField;
     // Button to run slowly
     @FXML private Button runSlowButton;
+    // Field that system out is outputting to
     @FXML private TextArea logField;
+    // Drop down menu for  delay
     @FXML private MenuButton delayField;
-
+    // to hold the amount of delay selected
     private static int delayMS;
 
+    /**
+     * Runs when controller is initialized
+     */
     public void initialize(){
+        // Out stream redefinition so it outputs to the text area
         PrintStream outstream = new PrintStream(new Console(logField));
         System.setOut(outstream);
         System.out.println("  _____                         _____  _ _ _        _                 ");
@@ -42,7 +48,6 @@ public class Controller {
         System.out.println("|_____/ \\__,_| .__/ \\___|_|    |_____/|_| |_|\\_\\___/\\__|_|  \\__,_|___/");
         System.out.println("             | |                       _/ |                           ");
         System.out.println("             |_|                      |__/  Written by Andrew Lee");
-
         System.out.println("");
         System.out.println("Load file to continue...");
     }
@@ -73,6 +78,7 @@ public class Controller {
             runSlowButton.setDisable(false);
             System.out.println("File \"" + file.getName() + "\" loaded.");
         }else{
+            // disable button if file is not valid
             runSlowButton.setDisable(true);
             //runFastButton.setDisable(true);
         }
@@ -83,41 +89,40 @@ public class Controller {
      * Is run when Slow run button is pressed, loads data and runs dijkstras v^2
      * @param event Event
      */
-
     @FXML protected void handleRunSlowButtonAction(ActionEvent event){
         // read the file and load into filecontents
         Graph filecontents = FileReader.LoadGraphFile(file_path, false);
+        // if not loaded then throw exception
         if(filecontents == null){
             throw new NullPointerException("File open error");
         }
-        // Print out the contents as a test
-        /*for(Vertex v : filecontents.getVertices()){
-            System.out.print(v.getId() + ":");
-            for(int a : v.getEdges()){
-                System.out.print(a);
-            }
-            System.out.println("\n");
-        }
-        for(Edge e : filecontents.getEdges()){
-            System.out.println(e.getId());
-        }*/
+        // run Dijkstras method in new thread to prevent UI blocking
         Runnable r = new Runnable() {
             @Override
             public void run() {
                 Dijkstra.RunDijkstras(filecontents, 0, delayMS);
-
             }
         };
         new Thread(r).start();
     }
 
+    /**
+     * handleClearButton
+     * Clears the logfield
+     */
     @FXML protected  void handleClearButton(){
         logField.setText("");
         System.out.println("Log cleared");
     }
 
+    /**
+     * Function that handles the delay checkbox
+     * @param event check event
+     */
     @FXML protected void handleDelayToggle(ActionEvent event){
+        // Flip the checkbox on click
         delayField.setDisable(!delayField.isDisabled());
+        // set delay or unset it
         if(!delayField.isDisabled()){
             setDelay(Integer.parseInt(delayField.getText()));
         }else{
@@ -125,6 +130,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Drop menu item click
+     * @param event
+     */
     @FXML protected void actionMenu1(ActionEvent event){
         delayField.setText("500");
         setDelay(500);
@@ -150,11 +159,18 @@ public class Controller {
         setDelay(8000);
     }
 
+    /**
+     * Set delay to given value
+     * @param delay value
+     */
     private static void setDelay(int delay){
         delayMS = delay;
         System.out.println("Delay Enabled: " + delay + " ms");
     }
 
+    /**
+     * Outputs all data to the text area
+     */
     public class Console extends OutputStream{
         private TextArea outfield;
 

@@ -1,3 +1,7 @@
+/**
+ * IGNORE THIS DOCUMENT LOL
+ */
+
 package dijkstras;
 
 import java.util.ArrayList;
